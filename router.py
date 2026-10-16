@@ -1,0 +1,10 @@
+from backend.ai.providers.gemini import gemini_request
+from backend.ai.providers.groq import groq_request
+
+def ai_request(user_input):
+    try:
+        response=gemini_request(user_input)
+        return response
+    except Exception:
+        response=groq_request(user_input)
+        return response
