@@ -6,5 +6,8 @@ def ai_request(user_input):
         response=gemini_request(user_input)
         return response
     except Exception:
-        response=groq_request(user_input)
-        return response
+        try:
+            response=groq_request(user_input)
+            return response
+        except Exception:
+            raise RuntimeError("All AI providers failed.")

@@ -17,7 +17,7 @@ def groq_request(user_input):
                 ]
             )
             return response.choices[0].message.content
-        except APIConnectionError as e:
+        except APIConnectionError:
             if(attempt==attempts):
                 raise
             time.sleep(2)
