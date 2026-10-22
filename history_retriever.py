@@ -34,8 +34,27 @@ def command_normalization(user_input):
 def search_history(user_input):
     keywords=command_normalization(user_input)
     relevency_dictionary=dict()
+    key_counter=0
     for file_names in dictionaries_in_list_in_dictionary.keys():
         message_list=dictionaries_in_list_in_dictionary[file_names]
         for conversation_dictionary in message_list:
             content=conversation_dictionary["content"]
             keywords_of_the_content=command_normalization(content)
+            score_variable=0
+            for i in keywords:
+                if(i in keywords_of_the_content):
+                    score_variable+=1
+                else:
+                    continue
+            if(score_variable>0):
+                value_tuple=(conversation_dictionary, score_variable)
+                relevency_dictionary[key_counter]=value_tuple
+                key_counter+=1
+            else:
+                continue
+
+    sorted_dictionaries_by_relevence_score=sorted(
+        relevency_dictionary.values(),
+        key=lambda value_tuple: value_tuple[1],
+        reverse=True
+    )
