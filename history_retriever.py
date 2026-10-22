@@ -30,3 +30,12 @@ def command_normalization(user_input):
         if(i not in stop_word_list):
             keyword_list.append(i)
     return keyword_list
+
+def search_history(user_input):
+    keywords=command_normalization(user_input)
+    relevency_dictionary=dict()
+    for file_names in dictionaries_in_list_in_dictionary.keys():
+        message_list=dictionaries_in_list_in_dictionary[file_names]
+        for conversation_dictionary in message_list:
+            content=conversation_dictionary["content"]
+            keywords_of_the_content=command_normalization(content)
