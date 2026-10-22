@@ -1,5 +1,6 @@
 from backend.ai.router import ai_request
 from backend.history.history_manager import new_conversation_file, save_message
+from backend.history.history_classifier import classification
 
 def main():
     file_path=None
@@ -7,6 +8,8 @@ def main():
         user_input=str(input("You: "))
         if(user_input=="exit"):
             break
+        else:
+            classification_result=classification(user_input)
         if(file_path==None):
             file_path=new_conversation_file(user_input)
         save_message(file_path, {"role": "user", "content": user_input})
