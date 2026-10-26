@@ -34,6 +34,7 @@ def command_normalization(user_input):
 def search_history(user_input):
     keywords=command_normalization(user_input)
     relevency_dictionary=dict()
+    top_five_messages=[]
     key_counter=0
     for file_names in dictionaries_in_list_in_dictionary.keys():
         message_list=dictionaries_in_list_in_dictionary[file_names]
@@ -53,8 +54,12 @@ def search_history(user_input):
             else:
                 continue
 
-    sorted_dictionaries_by_relevence_score=sorted(
+    sorted_tuples_in_a_list_by_relevency_score=sorted(
         relevency_dictionary.values(),
         key=lambda value_tuple: value_tuple[1],
         reverse=True
     )
+    list_of_top_five_messages_and_relevency_score=sorted_tuples_in_a_list_by_relevency_score[0:5]
+    for i in list_of_top_five_messages_and_relevency_score:
+        top_five_messages.append(i[0])
+    return top_five_messages
